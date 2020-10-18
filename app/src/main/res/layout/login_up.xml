@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:scaleType="centerCrop"
+               android:id="@+id/login_bg"
+               android:background="@mipmap/login_bg"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:id="@+id/login"
+                      android:orientation="vertical">
+            <EditText android:layout_width="200dp"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="300dp"
+                      android:layout_gravity="center_horizontal"
+                      android:paddingHorizontal="20dp"
+                      android:paddingVertical="12dp"
+                      android:background="@drawable/selector_round_12dp_all_no"
+                      android:textColor="@color/color002"
+                      android:lines="1"
+                      android:singleLine="true"
+                      android:id="@+id/login_user"
+                      android:maxLength="16"
+                      android:fontFamily="@font/cy_w03"
+                      android:hint="用户名"/>
+            <EditText android:layout_width="200dp"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="20dp"
+                      android:layout_gravity="center_horizontal"
+                      android:paddingHorizontal="20dp"
+                      android:paddingVertical="12dp"
+                      android:background="@drawable/selector_round_12dp_all_no"
+                      android:inputType="textPassword"
+                      android:textColor="@color/color002"
+                      android:lines="1"
+                      android:singleLine="true"
+                      android:id="@+id/login_pwd"
+                      android:maxLength="16"
+                      android:fontFamily="@font/cy_w03"
+                      android:hint="密码"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_marginTop="20dp"
+                      android:textColor="@color/color001"
+                      android:fontFamily="@font/cy_w02"
+                      android:text="请牢记用户名和密码\n忘记之后将无法找回"/>
+
+        </LinearLayout>
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/selector_round_12dp_all_no"
+                android:paddingHorizontal="99dp"
+                android:layout_marginTop="44dp"
+                android:onClick="onLogin"
+                android:id="@+id/login_bt"
+                android:textSize="20sp"
+                android:textColor="@color/color001"
+                android:fontFamily="@font/cy_w04"
+                android:text="注册"/>
+    </LinearLayout>
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:id="@+id/logup">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:id="@+id/logup_div"
+                          android:orientation="vertical">
+                <EditText android:layout_width="200dp"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="200dp"
+                          android:layout_gravity="center_horizontal"
+                          android:paddingHorizontal="20dp"
+                          android:paddingVertical="12dp"
+                          android:background="@drawable/selector_round_12dp_all"
+                          android:textColor="@color/color002"
+                          android:lines="1"
+                          android:singleLine="true"
+                          android:id="@+id/logup_user"
+                          android:maxLength="16"
+                          android:fontFamily="@font/cy_w03"
+                          android:hint="用户名"/>
+                <EditText android:layout_width="200dp"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="20dp"
+                          android:layout_gravity="center_horizontal"
+                          android:paddingHorizontal="20dp"
+                          android:paddingVertical="12dp"
+                          android:background="@drawable/selector_round_12dp_all"
+                          android:inputType="textPassword"
+                          android:textColor="@color/color002"
+                          android:lines="1"
+                          android:singleLine="true"
+                          android:id="@+id/logup_pwd"
+                          android:maxLength="16"
+                          android:fontFamily="@font/cy_w03"
+                          android:hint="密码"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_horizontal"
+                          android:layout_marginTop="20dp"
+                          android:textColor="@color/color001"
+                          android:fontFamily="@font/cy_w02"
+                          android:text="我怎会轻易放弃"/>
+
+            </LinearLayout>
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="44dp"
+                    android:paddingHorizontal="66dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/selector_round_12dp_all"
+                    android:onClick="onLogup"
+                    android:id="@+id/logup_bt"
+                    android:fontFamily="@font/cy_w04"
+                    android:text="登录"
+                    android:textColor="@color/color002"
+                    android:textSize="20sp">
+            </Button>
+
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@mipmap/story_bg"
+              android:id="@+id/story">
+
+    <ScrollView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/story_text">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:paddingTop="80dp"
+                      android:paddingBottom="80dp"
+                      android:paddingLeft="60dp"
+                      android:paddingRight="60dp"
+                      android:orientation="vertical">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="21sp"
+                      android:textColor="@color/colorWhite"
+                      android:fontFamily="@font/cy_w02"
+                      android:text="@string/story_01"
+            />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="21sp"
+                      android:textColor="@color/colorWhite"
+                      android:fontFamily="@font/cy_w02"
+                      android:text="@string/story_02"
+            />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="21sp"
+                      android:textColor="@color/colorWhite"
+                      android:fontFamily="@font/cy_w02"
+                      android:text="@string/story_03"
+            />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="21sp"
+                      android:textColor="@color/colorWhite"
+                      android:fontFamily="@font/cy_w02"
+                      android:text="@string/story_04"
+            />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="21sp"
+                      android:textColor="@color/colorWhite"
+                      android:fontFamily="@font/cy_w02"
+                      android:text="@string/story_05"
+            />
+        </LinearLayout>
+    </ScrollView>
+
+
+    <Button
+            android:text="开启浪漫旅程"
+            android:fontFamily="@font/cy_w04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/storyStart"
+            android:background="@drawable/selector_round_12dp_all"
+            android:layout_gravity="center_horizontal"
+            android:paddingRight="100dp"
+            android:paddingLeft="100dp"
+            android:textSize="20sp"
+            android:textColor="@color/color002"
+    />
+</LinearLayout>

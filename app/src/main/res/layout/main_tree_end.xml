@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:id="@+id/main_tree_end">
+
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="showLog"
+            android:background="@drawable/selector_round_20dp_top"
+            android:stateListAnimator="@null"
+            android:textSize="20sp"
+            android:text="日志"
+            android:fontFamily="@font/cy_w05"
+            android:id="@+id/main_tree_end_log_button"/>
+    <!--        <Button android:layout_width="wrap_content"-->
+    <!--                android:layout_height="2dip"-->
+    <!--                android:layout_centerHorizontal="true"-->
+    <!--                android:background="@color/colorWhite01"-->
+    <!--                android:layout_below="@id/main_tree_end_log_button"-->
+    <!--                android:stateListAnimator="@null"-->
+    <!--                android:id="@+id/main_tree_end_log_button_hr"-->
+    <!--                android:orientation="horizontal"></Button>-->
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@drawable/shape_round_12dp_all_down"
+                  android:padding="20dp"
+                  android:id="@+id/main_tree_end_log_content"
+                  android:orientation="vertical">
+
+        <Button android:layout_width="match_parent"
+                android:text="test"
+                android:layout_height="match_parent"></Button>
+
+    </LinearLayout>
+
+</LinearLayout>
