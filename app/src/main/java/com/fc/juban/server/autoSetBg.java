@@ -1,22 +1,14 @@
 package com.fc.juban.server;
 
-
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.IBinder;
 import android.os.Message;
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 import com.fc.juban.main_tree;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.SimpleTimeZone;
 
 public class autoSetBg extends Service {
     @Nullable

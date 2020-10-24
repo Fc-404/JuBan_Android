@@ -7,9 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import com.fc.juban.module.RoundImageView;
@@ -30,6 +28,7 @@ public class set_bg extends Activity {
     //控件
     private TextView titleTheme;
     private LinearLayout themeView;
+    private SeekBar alpha;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,10 +45,12 @@ public class set_bg extends Activity {
         //获取控件
         titleTheme = (TextView) findViewById(R.id.set_bg_title_theme);
         themeView = (LinearLayout) findViewById(R.id.set_bg_theme_view);
+        alpha = (SeekBar) findViewById(R.id.set_bg_theme_alpha);
 
         //通过intent设置当前主题
         intent = getIntent();
         titleTheme.setText(intent.getStringExtra("bgCode"));
+        alpha.setProgress((int)(intent.getFloatExtra("bgAlpha", 1) * 100));
         setResult(20, intent);
 
         bg = new bgRes();
@@ -66,6 +67,24 @@ public class set_bg extends Activity {
             ).callOnClick();
         }
 
+        //seekbar控件值改变事件
+        alpha.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                intent.putExtra("bgAlpha", (float) progress / 100);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                return;
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                return;
+            }
+        });
+
         //点击主题返回
         titleTheme.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -76,11 +95,12 @@ public class set_bg extends Activity {
     }
 
     private void draw(){
+        int indexView = 0;
         //TIME
-        themeView.addView(newTextView("TIME"));
+        themeView.addView(newTextView("TIME"), indexView++);
         for (int i = 0; i < bg.image_time_name.size(); i++){
             LinearLayout group = newLinear();
-            themeView.addView(group);
+            themeView.addView(group, indexView++);
             image_time.add(group);
 
             RoundImageView left = new RoundImageView(this);
@@ -111,10 +131,10 @@ public class set_bg extends Activity {
         }
 
         //IP
-        themeView.addView(newTextView("IP"));
+        themeView.addView(newTextView("IP"), indexView++);
         for (int i = 0; i < bg.image_ip_name.size(); i++){
             LinearLayout group = newLinear();
-            themeView.addView(group);
+            themeView.addView(group, indexView++);
             image_ip.add(group);
 
             RoundImageView img = new RoundImageView(this);

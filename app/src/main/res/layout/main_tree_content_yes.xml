@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/main_tree_content_yes"
+              android:orientation="vertical">
+    <!--首部模块-->
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:layout_height="150dp">
+        <LinearLayout android:layout_width="wrap_content"
+                      android:orientation="horizontal"
+                      android:onClick="Q"
+                      android:layout_marginRight="12dp"
+                      android:layout_gravity="left|center_vertical"
+                      android:layout_height="80dp">
+            <TextView android:layout_width="wrap_content"
+                      android:text="Ta的\n心情"
+                      android:fontFamily="@font/cy_w02"
+                      android:textSize="20dp"
+                      android:gravity="center"
+                      android:paddingHorizontal="20dp"
+                      android:background="@color/colorWhite"
+                      android:layout_height="match_parent"/>
+            <ImageView android:layout_width="80dp"
+                       android:padding="12dp"
+                       android:id="@+id/main_tree_content_moodTa"
+                       android:src="@mipmap/icon"
+                       android:background="@drawable/shape_round_40dp_right"
+                       android:layout_height="80dp"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp"
+              android:layout_weight="0"
+              android:layout_height="match_parent"/>
+        <TextView android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:maxHeight="100dp"
+                  android:onClick="Q"
+                  android:text="愿世间美好\n与你环环相扣\n点击下载:ja.wwgm.top"
+                  android:fontFamily="@font/cy_w02"
+                  android:textSize="16sp"
+                  android:layout_marginRight="0dp"
+                  android:autoLink="web"
+                  android:background="@drawable/shape_round_12dp_all_white"
+                  android:layout_gravity="center_vertical"
+                  android:gravity="center_vertical|right"
+                  android:padding="12dp"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <!--交互模块-->
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_weight="1"
+                  android:layout_height="0dp">
+        <!--左边交互模块-->
+        <LinearLayout android:layout_width="wrap_content"
+                      android:orientation="vertical"
+                      android:layout_gravity="center_vertical"
+                      android:layout_height="wrap_content">
+            <ImageView android:layout_width="60dp"
+                       android:id="@+id/main_tree_content_mood"
+                       android:onClick="mood"
+                       android:layout_marginTop="100dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/kaixin"
+                       android:background="@drawable/shape_round_30dp_right"
+                       android:layout_height="60dp"/>
+            <ImageView android:layout_width="60dp"
+                       android:onClick="pendant"
+                       android:layout_marginTop="20dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/pendant"
+                       android:background="@drawable/shape_round_30dp_right"
+                       android:layout_height="60dp"/>
+            <ImageView android:layout_width="60dp"
+                       android:onClick="leave"
+                       android:layout_marginTop="20dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/leave"
+                       android:background="@drawable/shape_round_30dp_right"
+                       android:layout_height="60dp"/>
+        </LinearLayout>
+        <!--中间视图模块-->
+        <LinearLayout android:layout_width="0dp"
+                      android:layout_weight="1"
+                      android:background="@color/colorWhiteT"
+                      android:layout_height="match_parent">
+
+        </LinearLayout>
+        <!--右边交互模块-->
+        <LinearLayout android:layout_width="wrap_content"
+                      android:orientation="vertical"
+                      android:layout_gravity="center_vertical"
+                      android:layout_height="wrap_content">
+            <ImageView android:layout_width="60dp"
+                       android:onClick="watering"
+                       android:layout_marginTop="20dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/watering"
+                       android:background="@drawable/shape_round_30dp_left"
+                       android:layout_height="60dp"/>
+            <ImageView android:layout_width="60dp"
+                       android:onClick="manure"
+                       android:layout_marginTop="20dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/manure"
+                       android:background="@drawable/shape_round_30dp_left"
+                       android:layout_height="60dp"/>
+            <ImageView android:layout_width="60dp"
+                       android:onClick="debug"
+                       android:layout_marginTop="20dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/debug"
+                       android:background="@drawable/shape_round_30dp_left"
+                       android:layout_height="60dp"/>
+            <ImageView android:layout_width="60dp"
+                       android:onClick="weeding"
+                       android:layout_marginTop="20dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/weeding"
+                       android:background="@drawable/shape_round_30dp_left"
+                       android:layout_height="60dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

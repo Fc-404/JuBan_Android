@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/main_tree_content_no"
+              android:orientation="horizontal">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:padding="20dp"
+                    android:clipToPadding="false"
+                    android:clipChildren="false"
+                    android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
+            <Button android:layout_width="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:text="刷新"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/cy_w02"
+                    android:id="@+id/main_tree_content_no_updata"
+                    android:background="@drawable/selector_round_12dp_all"
+                    android:layout_height="wrap_content"/>
+            <!--邀请展示大厅-->
+            <ScrollView android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:padding="20dp">
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="vertical"
+                              android:id="@+id/main_tree_content_no_hall"
+                              android:layout_height="wrap_content">
+                    <!--                    <LinearLayout android:layout_width="match_parent"-->
+                    <!--                                  android:padding="20dp"-->
+                    <!--                                  android:layout_marginBottom="20dp"-->
+                    <!--                                  android:background="@drawable/selector_round_12dp_all"-->
+                    <!--                                  android:layout_height="wrap_content"-->
+                    <!--                                  android:orientation="vertical">-->
+                    <!--                        <TextView android:layout_width="match_parent"-->
+                    <!--                                  android:text="Ta"-->
+                    <!--                                  android:textSize="16sp"-->
+                    <!--                                  android:fontFamily="@font/cy_w01"-->
+                    <!--                                  android:layout_height="wrap_content"/>-->
+                    <!--                        <LinearLayout android:layout_width="match_parent"-->
+                    <!--                                      android:orientation="horizontal"-->
+                    <!--                                      android:layout_height="wrap_content">-->
+                    <!--                            <TextView android:layout_width="0dp"-->
+                    <!--                                      android:layout_weight="1"-->
+                    <!--                                      android:fontFamily="@font/cy_w02"-->
+                    <!--                                      android:textSize="16sp"-->
+                    <!--                                      android:gravity="left|center"-->
+                    <!--                                      android:text="我是一只有趣的小盆友"-->
+                    <!--                                      android:layout_height="match_parent"/>-->
+                    <!--                            <Button android:layout_width="wrap_content"-->
+                    <!--                                    android:text="喜欢Ta"-->
+                    <!--                                    android:fontFamily="@font/cy_w02"-->
+                    <!--                                    android:layout_margin="6dp"-->
+                    <!--                                    android:background="@drawable/selector_round_12dp_all_gray"-->
+                    <!--                                    android:layout_height="match_parent"/>-->
+                    <!--                        </LinearLayout>-->
+                    <!--                    </LinearLayout>-->
+                </LinearLayout>
+            </ScrollView>
+            <!--编辑自己的邀请-->
+            <LinearLayout android:layout_width="match_parent"
+                          android:padding="20dp"
+                          android:background="@drawable/selector_round_12dp_all"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <TextView android:layout_width="match_parent"
+                          android:text="合种邀请"
+                          android:textSize="16sp"
+                          android:fontFamily="@font/cy_w01"
+                          android:layout_height="wrap_content"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="horizontal"
+                              android:layout_height="wrap_content">
+                    <TextView android:layout_width="0dp"
+                              android:layout_weight="1"
+                              android:fontFamily="@font/cy_w02"
+                              android:textSize="16sp"
+                              android:gravity="left|center"
+                              android:text="我是一只温柔的小猫咪\n编辑之后会发送到大厅"
+                              android:id="@+id/main_tree_content_no_selfneed"
+                              android:layout_height="match_parent"/>
+                    <Button android:layout_width="wrap_content"
+                            android:text="编辑"
+                            android:fontFamily="@font/cy_w02"
+                            android:layout_margin="6dp"
+                            android:background="@drawable/selector_round_12dp_all_gray"
+                            android:id="@+id/main_tree_content_no_selfedit"
+                            android:layout_height="match_parent"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <!--邀请我提示-->
+        <LinearLayout android:layout_width="match_parent"
+                      android:padding="20dp"
+                      android:alpha="0.9"
+                      android:visibility="gone"
+                      android:elevation="20dp"
+                      android:clickable="true"
+                      android:id="@+id/main_tree_content_no_miss"
+                      android:background="@drawable/shape_round_12dp_all_white"
+                      android:layout_height="wrap_content">
+            <TextView android:layout_width="0dp"
+                      android:layout_weight="6"
+                      android:fontFamily="@font/cy_w02"
+                      android:textSize="16sp"
+                      android:gravity="left|center"
+                      android:text="###想和你开启浪漫之旅"
+                      android:id="@+id/main_tree_content_no_miss_text"
+                      android:layout_height="match_parent"/>
+            <Button android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:text="接受"
+                    android:fontFamily="@font/cy_w02"
+                    android:layout_margin="6dp"
+                    android:id="@+id/main_tree_content_no_miss_accept"
+                    android:background="@drawable/selector_round_12dp_all_gray"
+                    android:layout_height="match_parent"/>
+            <Button android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:text="拒绝"
+                    android:fontFamily="@font/cy_w02"
+                    android:layout_margin="6dp"
+                    android:id="@+id/main_tree_content_no_miss_refuse"
+                    android:background="@drawable/selector_round_12dp_all_gray"
+                    android:layout_height="match_parent"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

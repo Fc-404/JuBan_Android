@@ -19,11 +19,11 @@ public class nativeIni {
         logPath = "JuBan/diary.ini";
 
         if (!fileIO.check()) {
-            Toast.makeText(context, "读写配置文件失败，请检查软件是否有文件读写权限。", Toast.LENGTH_LONG);
+            Toast.makeText(context, "读写配置文件失败，请检查软件是否有文件读写权限。", Toast.LENGTH_LONG).show();
             return;
         }
         String iniStr = fileIO.readFromSD(iniPath);
-        String logStr = fileIO.readFromSD(iniPath);
+        String logStr = fileIO.readFromSD(logPath);
         iniPutIn = new string2ini(iniStr).getResult();
         logPutIn = new string2ini(logStr).getResult();
     }
@@ -31,7 +31,7 @@ public class nativeIni {
     public twoArray getIni(){
         return iniPutIn;
     }
-    public twoArray getLog(){
+    public twoArray getDiary(){
         return logPutIn;
     }
 
@@ -50,7 +50,7 @@ public class nativeIni {
         fileIO.savaToSD(iniPath, iniOutStr);
         return true;
     }
-    public boolean setLog(String key, String value){
+    public boolean setDiary(String key, String value){
         if (fileIO.savaToSD(logPath, key + "=" + value + "\n", true))
             return true;
         return false;

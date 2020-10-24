@@ -5,7 +5,7 @@ public class xml2ini {
 
     public xml2ini(String source){
         this.result = new twoArray();
-        if (source.isEmpty())
+        if (source == null || source.isEmpty())
             return;
         //
         String group = null;

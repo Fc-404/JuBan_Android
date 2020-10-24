@@ -33,9 +33,48 @@
                 android:layout_height="match_parent">
         <LinearLayout android:layout_width="wrap_content"
                       android:id="@+id/set_bg_theme_view"
+                      android:paddingBottom="44dp"
                       android:layout_height="wrap_content"
                       android:orientation="vertical">
-
+            <TextView android:layout_width="match_parent"
+                      android:text="ALPHA"
+                      android:textSize="20sp"
+                      android:paddingTop="88px"
+                      android:paddingBottom="44px"
+                      android:fontFamily="@font/cy_w03"
+                      android:layout_height="wrap_content"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content"
+                          android:text="全透明"
+                          android:textSize="20sp"
+                          android:gravity="center"
+                          android:fontFamily="@font/cy_w02"
+                          android:layout_height="match_parent"/>
+                <SeekBar
+                        android:id="@+id/set_bg_theme_alpha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        style="@style/SeekbarStyle"
+                        android:padding="12dp"
+                        android:maxHeight="44dp"
+                        android:minHeight="44dp"
+                        android:background="@null"
+                        android:max="100"
+                        android:progress="0"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="不透明"
+                          android:textSize="20sp"
+                          android:gravity="center"
+                          android:fontFamily="@font/cy_w02"
+                          android:layout_height="match_parent"/>
+            </LinearLayout>
+            <TextView android:layout_width="match_parent"
+                      android:fontFamily="@font/cy_w01"
+                      android:text="设置为全透明你会抓狂的&amp;_&amp;"
+                      android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
 

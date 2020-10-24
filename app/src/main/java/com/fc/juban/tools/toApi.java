@@ -41,10 +41,13 @@ public class toApi {
     private StringBuffer resultTemp_Temp = new StringBuffer("");
     private String result;
 
-    final Message mineMes = Message.obtain();
+    Message mineMes = Message.obtain();
     Handler mine;
 
     //构造函数
+    public toApi(){
+        this.apiUrl = null;
+    }
     public toApi(String apiUrl) {
         try {
             this.apiUrl = new URL(apiUrl);
@@ -53,12 +56,22 @@ public class toApi {
             this.apiUrl = null;
         }
     }
+    //设置api
+    public toApi set(String str){
+        try {
+            this.apiUrl = new URL(str);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            this.apiUrl = null;
+        }
+        return this;
+    }
 
     //获取
-    public void get() {
+    public toApi get() {
         if (apiUrl == null) {
             missBefore();
-            return;
+            return this;
         }
 
         mine = new Handler() {
@@ -84,10 +97,12 @@ public class toApi {
             public void run() {
                 super.run();
                 HttpURLConnection apiObj = null;
+                mineMes = mine.obtainMessage();
                 mineMes.what = 0;
                 try {
                     apiObj = (HttpURLConnection) apiUrl.openConnection();
                     apiObj.setRequestMethod("GET");
+                    apiObj.setRequestProperty("Charsert", "utf-8");
                     apiObj.setConnectTimeout(9000);
                     apiObj.setReadTimeout(9000);
                     apiObj.connect();
@@ -117,12 +132,16 @@ public class toApi {
                 mine.sendMessage(mineMes);
             }
         }.start();
-
+        return this;
     }
 
     //获取结果
     public twoArray getResult() {
         twoArray m = new xml2ini(result).getResult();
+        return m;
+    }
+    public twoArrayR getResultR() {
+        twoArrayR m = new xml2iniR(result).getResult();
         return m;
     }
 
@@ -155,8 +174,8 @@ public class toApi {
         String str = toApi.addSeedInfo +
                 "?seedId=" + seedId +
                 "&id=" + id +
-                "&type" + type +
-                "&value" + value +
+                "&type=" + type +
+                "&value=" + value +
                 "&key=" + toApi.getKey();
         return str;
     }
@@ -172,49 +191,49 @@ public class toApi {
     //delMiss
     public static String api_delMiss(String id){
         String str = toApi.delMiss +
-                "&id=" + id +
+                "?id=" + id +
                 "&key=" + toApi.getKey();
         return str;
     }
     //delNeed
     public static String api_delNeed(String id) {
         String str = toApi.delNeed +
-                "&id=" + id +
+                "?id=" + id +
                 "&key=" + toApi.getKey();
         return str;
     }
     //delSeed
     public static String api_delSeed(String id) {
         String str = toApi.delSeed +
-                "&id=" + id +
+                "?id=" + id +
                 "&key=" + toApi.getKey();
         return str;
     }
     //findMiss
     public static String api_findMiss(String id) {
         String str = toApi.findMiss +
-                "&id=" + id +
+                "?id=" + id +
                 "&key=" + toApi.getKey();
         return str;
     }
     //findNeed
     public static String api_findNeed(String id) {
         String str = toApi.findNeed +
-                "&id=" + id +
+                "?id=" + id +
                 "&key=" + toApi.getKey();
         return str;
     }
     //findSeed
     public static String api_findSeed(String id) {
         String str = toApi.findSeed +
-                "&id=" + id +
+                "?id=" + id +
                 "&key=" + toApi.getKey();
         return str;
     }
     //getSeedInfo
     public static String api_getSeedInfo(String seedId) {
         String str = toApi.getSeedInfo +
-                "&seedId=" + seedId +
+                "?seedId=" + seedId +
                 "&key=" + toApi.getKey();
         return str;
     }
@@ -259,9 +278,10 @@ public class toApi {
         return str;
     }
     //mdSeedInfo
-    public static String api_mdSeedInfo(String seedId, String type, String value) {
+    public static String api_mdSeedInfo(String seedId,String id, String type, String value) {
         String str = toApi.mdSeedInfo +
                 "?seedId=" + seedId +
+                "&id=" + id +
                 "&type=" + type +
                 "&value=" + value +
                 "&key=" + toApi.getKey();

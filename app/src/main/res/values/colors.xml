@@ -6,13 +6,16 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorOrange">#FF7400</color>
     <color name="colorWhite">#FAFAFA</color>
+    <color name="colorWhiteT">#66FAFAFA</color>
     <color name="colorWhite01">#DDDDDD</color>
     <color name="colorWhite02">#D7D7D7</color>
     <color name="colorWhite03">#CCCCCC</color>
     <color name="colorWhite04">#EEEEEE</color>
+    <color name="colorWhite05">#CCD1D9</color>
     <color name="colorPink">#FFBFCD</color>
     <color name="color001">#A0EEE1</color>
     <color name="color002">#67B1A4</color>
+    <color name="color003">#FD5655</color>
 
     <!--青蓝渐变色-->
     <color name="colorQLStart">#69FF97</color>

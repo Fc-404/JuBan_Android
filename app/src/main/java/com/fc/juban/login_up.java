@@ -130,7 +130,7 @@ public class login_up extends Activity {
     private void onLogupEnt() {
         String user = logup_user.getText().toString();
         String pwd = logup_pwd.getText().toString();
-        if (checkUserPwd.check(user, pwd) == false){
+        if (checkStr.checkUserPwd(user, pwd) == false){
             stringErr.show();
         } else {
             //创建LoadProgressDialog
@@ -149,7 +149,7 @@ public class login_up extends Activity {
                         stringErr.show();
                     } else if (logup_new.getResult().getKeyValue("return").equals("true")){
                         mdData.putString("user", logup_user.getText().toString());
-                        mdData.putString("pwd", getMD5.get(logup_pwd.getText().toString()));
+                        mdData.putString("pwd", logup_pwd.getText().toString());
                         //
                         stringErr.setTitle("登录成功");
                         stringErr.setMessage("快开始你的浪漫慢慢慢...之旅吧^_^\n漫长用在喜欢你上，就没那么讨厌啦\n嘻嘻");
@@ -183,7 +183,7 @@ public class login_up extends Activity {
     private void onLoginEnt() {
         String user = login_user.getText().toString();
         String pwd = login_pwd.getText().toString();
-        if (checkUserPwd.check(user, pwd) == false){
+        if (checkStr.checkUserPwd(user, pwd) == false){
             stringErr.show();
         } else {
             //创建LoadProgressDialog

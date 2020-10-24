@@ -13,15 +13,20 @@
                android:src="@mipmap/main_bg_time_sun_0"/>
 
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:clipChildren="false"
-                  android:clipToPadding="false"
-                  android:orientation="vertical">
+                  android:layout_height="2000dp">
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:id="@+id/main_tree_layout_alpha"
+                        android:orientation="vertical">
 
-        <include layout="@layout/main_tree_head"/>
-        <include layout="@layout/main_tree_content"/>
-        <include layout="@layout/main_tree_end"/>
+            <include layout="@layout/main_tree_content"/>
+            <include layout="@layout/main_tree_head"/>
+            <include layout="@layout/main_tree_end"/>
 
+        </RelativeLayout>
     </LinearLayout>
+
 
 </FrameLayout>

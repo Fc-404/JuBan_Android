@@ -16,9 +16,9 @@ public class twoArray {
     List<List> l = new ArrayList<List>();
 
     //设置根键值
-    public void setKeyValue(String key, String value){
+    public void setKeyValue(String key, String value) {
         int indexRoot = root.indexOf(key);
-        if (indexRoot == -1){
+        if (indexRoot == -1) {
             root.add(key);
             root2.add(value);
         } else {
@@ -26,9 +26,11 @@ public class twoArray {
         }
 
     }
+
     //设置带组键值
-    public void setKeyValue(String key, String value, String groupN){
-        int indexGroup = group.indexOf(groupN);
+    public void setKeyValue(String key, String value, String groupN) {
+        int indexGroup;
+        indexGroup = group.indexOf(groupN);
         if (indexGroup == -1) {
             group.add(groupN);
             l.add(new ArrayList<String>());
@@ -36,55 +38,60 @@ public class twoArray {
         }
         indexGroup = group.indexOf(groupN);
         int indexRoot = l.get(indexGroup * 2).indexOf(key);
-        if (indexRoot == -1){
+        if (indexRoot == -1) {
             l.get(indexGroup * 2).add(key);
             l.get(indexGroup * 2 + 1).add(value);
-        }else {
+        } else {
             l.get(indexGroup * 2 + 1).set(indexRoot, value);
         }
     }
 
     //获取根键值
-    public String getKeyValue(String key){
+    public String getKeyValue(String key) {
         int indexRoot = root.indexOf(key);
         if (indexRoot == -1)
-            return null;
+            return "";
         return root2.get(indexRoot);
     }
+
     //获取带组键值
-    public String getKeyValue(String key, String group){
+    public String getKeyValue(String key, String group) {
         int indexGroup = this.group.indexOf(group);
         if (indexGroup == -1)
-            return null;
+            return "";
         int indexRoot = l.get(indexGroup * 2).indexOf(key);
         if (indexRoot == -1)
-            return null;
-        return (String)l.get(indexGroup * 2 + 1).get(indexRoot);
+            return "";
+        return (String) l.get(indexGroup * 2 + 1).get(indexRoot);
     }
 
     //获取组长
-    public int groupLength(){
+    public int groupLength() {
         return group.size();
     }
+
     //获取根长
-    public int rootLength(){
+    public int rootLength() {
         return root.size();
     }
-    public int rootLength(String group){
+
+    public int rootLength(String group) {
         if (this.group.indexOf(group) < 0)
             return -1;
         return l.get(this.group.indexOf(group) * 2).size();
     }
 
     //获取组链
-    public List<String> getGroupList(){
+    public List<String> getGroupList() {
         return group;
     }
+
     //获取根链
-    public List<String> getRootList(){
+    public List<String> getRootList() {
         return root;
     }
-    public List<String> getRootList(String group){
-        return l.get(this.group.indexOf(group) * 2);
+
+    public List<String> getRootList(String group) {
+        return l.get((this.group.indexOf(group) == -1 ? 0 : this.group.indexOf(group)) * 2);
     }
 }

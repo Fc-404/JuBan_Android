@@ -2,9 +2,11 @@ package com.fc.juban.tools;
 
 public class string2ini {
     twoArray result;
+    twoArrayR resultR;
 
     public string2ini(String str){
         this.result = new twoArray();
+        this.resultR = new twoArrayR();
         if (str.isEmpty())
             return;
         //
@@ -27,16 +29,23 @@ public class string2ini {
 
             key = strTemp.substring(0, strTemp.indexOf("="));
             value = strTemp.substring(strTemp.indexOf("=") + 1, strTemp.indexOf("\n"));
-            if (group.equals(""))
+            if (group.equals("")) {
                 result.setKeyValue(key, value);
-            else
+                resultR.setKeyValue(key, value);
+            }
+            else {
                 result.setKeyValue(key, value, group);
+                resultR.setKeyValue(key, value, group);
+            }
             i += strTemp.indexOf("\n") + 1;
         }
     }
 
     public twoArray getResult(){
         return this.result;
+    }
+    public twoArrayR getResultR(){
+        return this.resultR;
     }
 
 }

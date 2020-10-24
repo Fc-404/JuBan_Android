@@ -3,6 +3,11 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:id="@+id/main_tree_content"
+              android:layout_below="@id/main_tree_head"
               android:orientation="horizontal">
+    <include layout="@layout/main_tree_content_no"
+             android:id="@+id/main_tree_content_include_no"/>
+    <include layout="@layout/main_tree_content_yes"
+             android:id="@+id/main_tree_content_include_yes"/>
 
 </LinearLayout>

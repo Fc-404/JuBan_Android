@@ -41,7 +41,7 @@ public class welcome extends AppCompatActivity {
         });
 
         //时隔3s跳转到下一个窗口
-        jump(3000);
+        jump(0);
     }
 
     //自动跳转
