@@ -104,7 +104,7 @@ public class mainYesViews {
         return rootDiv;
     }
 
-    public LinearLayout leaveView(final AlertDialog.Builder mine, final SharedPreferences userData){
+    public LinearLayout leaveView(EditText wordView, View.OnClickListener buttonClick){
         LinearLayout root = new LinearLayout(text);
         root.setLayoutParams(new ViewGroup.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -115,7 +115,7 @@ public class mainYesViews {
         root.setClipToPadding(false);
         root.setClickable(false);
 
-        final EditText wordView = new EditText(text);
+        //final EditText wordView = new EditText(text);
         LinearLayout.LayoutParams wordParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 dp2px.dp(120)
@@ -138,35 +138,7 @@ public class mainYesViews {
         ack.setText("确认");
         ack.setTextSize(20);
         ack.setBackground(text.getDrawable(R.drawable.selector_round_12dp_all_gray));
-        ack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!checkStr.checkLeave(wordView.getText().toString())){
-                    Toast.makeText(text, "文字中出现非常规字符\u3000请重试", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                final toApi leaveUp = new toApi();
-                leaveUp.set(toApi.api_addSeedInfo(
-                        userData.getString("seed", ""),
-                        userData.getString("user", ""),
-                        "leave", wordView.getText().toString())).get();
-                leaveUp.setCheck(new check() {
-                    @Override
-                    public void okBefore() {
-                        if ("true".equals(leaveUp.getResult().getKeyValue("return")))
-                            Toast.makeText(text, "留言成功", Toast.LENGTH_LONG).show();
-                        else
-                            Toast.makeText(text, "你的留言丢失在茫茫人海中了", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void missBefore() {
-                        Toast.makeText(text, "网线可能有脾气", Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-        });
+        ack.setOnClickListener(buttonClick);
 
         root.addView(wordView);
         root.addView(ack);

@@ -97,9 +97,9 @@ public class login_up extends Activity {
 
     //判断是否登录
     private boolean isLogup(){
-        if (data.getString("user", null) == null)
+        if (data.getString("user", "") == "")
             return false;
-        else if (data.getString("user", null) != null)
+        else if (data.getString("user", "") != "")
             return true;
         return false;
     }

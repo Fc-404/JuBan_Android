@@ -30,6 +30,7 @@ public class toApi {
     final public static String mdNeed = prefix + "mdNeed" + suffix;
     final public static String mdSeed = prefix + "mdSeed" + suffix;
     final public static String mdSeedInfo = prefix + "mdSeedlnfo" + suffix;
+    final public static String lowerWorld = prefix + "lowerWorld.html";
 
     //私钥
     private static String keyStr = "fc";

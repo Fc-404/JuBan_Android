@@ -114,15 +114,21 @@
             <RelativeLayout android:layout_width="match_parent"
                             android:layout_height="match_parent">
                 <LinearLayout android:layout_width="match_parent"
+                              android:orientation="vertical"
                               android:layout_height="match_parent">
-                    <LinearLayout android:layout_width="0dp"
-                                  android:layout_height="match_parent"
-                                  android:layout_weight="55"
-                                  android:orientation="vertical">
-                        <LinearLayout android:layout_width="match_parent"
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="0dp"
+                                  android:layout_weight="1"
+                                  android:clipToPadding="false"
+                                  android:clickable="false"
+                                  android:orientation="horizontal">
+                        <LinearLayout android:layout_width="0dp"
+                                      android:layout_weight="1"
                                       android:layout_height="wrap_content"
                                       android:paddingHorizontal="12dp"
                                       android:paddingVertical="6dp"
+                                      android:clipToPadding="false"
+                                      android:clickable="false"
                                       android:orientation="horizontal">
                             <TextView android:layout_width="wrap_content"
                                       android:text="成长值："
@@ -132,27 +138,12 @@
                             <TextView android:layout_width="match_parent"
                                       android:text="0"
                                       android:textSize="16sp"
+                                      android:maxLines="1"
                                       android:fontFamily="@font/cy_w02"
                                       android:id="@+id/main_tree_head_info_main_love"
                                       android:layout_height="wrap_content"/>
                         </LinearLayout>
-
-                        <TextView android:layout_width="match_parent"
-                                  android:layout_height="wrap_content"
-                                  android:clickable="false"
-                                  android:textSize="20sp"
-                                  android:fontFamily="@font/cy_w03"
-                                  android:paddingHorizontal="12dp"
-                                  android:maxLines="1"
-                                  android:ellipsize="end"
-                                  android:id="@+id/main_tree_head_info_main_wo"
-                                  android:text="Wo"/>
-                    </LinearLayout>
-                    <LinearLayout android:layout_width="0dp"
-                                  android:layout_height="match_parent"
-                                  android:layout_weight="45"
-                                  android:orientation="vertical">
-                        <LinearLayout android:layout_width="match_parent"
+                        <LinearLayout android:layout_width="wrap_content"
                                       android:layout_height="wrap_content"
                                       android:paddingHorizontal="12dp"
                                       android:paddingTop="6dp"
@@ -170,7 +161,24 @@
                                       android:fontFamily="@font/cy_w02"
                                       android:layout_height="wrap_content"/>
                         </LinearLayout>
-                        <LinearLayout android:layout_width="match_parent"
+
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="0dp"
+                                  android:layout_weight="1"
+                                  android:orientation="horizontal">
+                        <TextView android:layout_width="0dp"
+                                  android:layout_weight="1"
+                                  android:layout_height="wrap_content"
+                                  android:clickable="false"
+                                  android:textSize="20sp"
+                                  android:fontFamily="@font/cy_w03"
+                                  android:paddingHorizontal="12dp"
+                                  android:maxLines="1"
+                                  android:ellipsize="end"
+                                  android:id="@+id/main_tree_head_info_main_wo"
+                                  android:text="Wo"/>
+                        <LinearLayout android:layout_width="wrap_content"
                                       android:layout_height="wrap_content"
                                       android:paddingHorizontal="12dp"
                                       android:paddingVertical="6dp"
@@ -180,7 +188,7 @@
                                       android:textSize="16sp"
                                       android:fontFamily="@font/cy_w01"
                                       android:layout_height="wrap_content"/>
-                            <TextView android:layout_width="match_parent"
+                            <TextView android:layout_width="wrap_content"
                                       android:text="Ta"
                                       android:textSize="16sp"
                                       android:maxLines="1"

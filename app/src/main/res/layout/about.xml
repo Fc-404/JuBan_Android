@@ -88,6 +88,13 @@
                       android:layout_height="wrap_content"/>
             <TextView android:layout_width="match_parent"
                       android:gravity="center"
+                      android:text="表情:\u3000来自阿里云矢量图库"
+                      android:textSize="16sp"
+                      android:layout_marginTop="12dp"
+                      android:fontFamily="@font/cy_w02"
+                      android:layout_height="wrap_content"/>
+            <TextView android:layout_width="match_parent"
+                      android:gravity="center"
                       android:text="启动背景:\u3000来自小米便签"
                       android:textSize="16sp"
                       android:layout_marginTop="12dp"

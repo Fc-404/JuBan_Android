@@ -96,4 +96,24 @@ public class fileIO {
         return true;
     }
 
+    public static boolean deleteToSD(String filename){
+        String rootDir;
+        try {
+            rootDir = Environment.getExternalStorageDirectory().getCanonicalPath();
+        } catch (Exception m){
+            m.printStackTrace();
+            return false;
+        }
+
+        int dirIndex = 0;
+        File file = new File(rootDir + "/" + filename);
+        try{
+            file.delete();
+            return true;
+        } catch (Exception m){
+            m.printStackTrace();
+            return false;
+        }
+    }
+
 }

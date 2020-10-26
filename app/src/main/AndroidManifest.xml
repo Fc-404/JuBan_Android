@@ -35,6 +35,7 @@
         <activity android:name=".main_tree"></activity>
         <activity android:name=".set_bg"></activity>
         <activity android:name=".about"></activity>
+        <activity android:name=".help"></activity>
 
         <service android:name=".server.autoSetBg"></service>
         <service android:name=".server.updataSeed"></service>

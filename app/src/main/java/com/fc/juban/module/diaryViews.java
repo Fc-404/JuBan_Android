@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.core.content.res.ResourcesCompat;
 import com.fc.juban.R;
+import com.fc.juban.main_tree;
 import com.fc.juban.tools.dp2px;
 
 import java.util.zip.GZIPInputStream;

@@ -92,6 +92,8 @@ public class twoArray {
     }
 
     public List<String> getRootList(String group) {
-        return l.get((this.group.indexOf(group) == -1 ? 0 : this.group.indexOf(group)) * 2);
+        if (this.group.indexOf(group) == -1)
+            return new ArrayList<String>();
+        return l.get(this.group.indexOf(group) * 2);
     }
 }

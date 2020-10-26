@@ -54,6 +54,7 @@ public class main_tree extends Activity {
     private Button mainTreeHeadMoreHelp;
     private Button mainTreeHeadMoreAbout;
     private Button mainTreeEndLogButton;
+    private TextView lowerWorld;
     //private Button mainTreeEndLogButtonHr;
     private TextView mainTreeHeadInfoContentWo;
     private TextView mainTreeHeadInfoContentTa;
@@ -64,6 +65,8 @@ public class main_tree extends Activity {
     private TextView mainTreeHeadInfoMainWo;
     private TextView mainTreeHeadInfoMainTa;
     private TextView mainTreeHeadInfoMainLevel;
+    private ImageView mainTreeContentYesTree;
+    private ImageView mainTreeContentYesBack;
 
     //
     public static Activity main_tree;
@@ -141,6 +144,9 @@ public class main_tree extends Activity {
         //content
         mainTreeContent = (LinearLayout) findViewById(R.id.main_tree_content);
         mainTreeContentNoHall = (LinearLayout) findViewById(R.id.main_tree_content_no_hall);
+        mainTreeContentYesTree = (ImageView) findViewById(R.id.main_tree_content_yes_tree);
+        mainTreeContentYesBack = (ImageView) findViewById(R.id.main_tree_content_yes_back);
+        lowerWorld = (TextView) findViewById(R.id.lowerWorld);
         //end
         mainTreeEnd = (LinearLayout) findViewById(R.id.main_tree_end);
         mainTreeEndLogContent = (LinearLayout) findViewById(R.id.main_tree_end_log_content);
@@ -211,7 +217,7 @@ public class main_tree extends Activity {
             public void okBefore() {
                 if ("true".equals(logup.getResult().getKeyValue("return"))) {
                     //登录成功
-                    Toast.makeText(main_tree, "登录成功", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(main_tree, "登录成功", Toast.LENGTH_SHORT).show();
                     logupCount = 3;
                 } else {
                     if (logupCount > 0) {
@@ -226,9 +232,7 @@ public class main_tree extends Activity {
                         m.postDelayed(logupAgain, 5000);
                         return;
                     }
-                    mdUserData.putString("user", null);
-                    mdUserData.putString("pwd", null);
-                    mdUserData.commit();
+
 
                     AlertDialog.Builder returnLogup = new AlertDialog.Builder(main_tree);
                     returnLogup.setTitle("验证失败");
@@ -236,6 +240,24 @@ public class main_tree extends Activity {
                     returnLogup.setPositiveButton("好的呢", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            mdUserData.putString("user", null);
+                            mdUserData.putString("pwd", null);
+                            mdUserData.commit();
+                            while (true) {
+                                try {
+                                    stopService(new Intent(main_tree, updataSeed.class));
+                                    break;
+                                } catch (Exception m) {
+                                    m.printStackTrace();
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                            fileIO.deleteToSD("Juban/diary.ini");
+                            fileIO.deleteToSD("Juban/ini.ini");
                             startActivity(new Intent(main_tree, login_up.class));
                             finish();
                         }
@@ -281,6 +303,9 @@ public class main_tree extends Activity {
                     //3秒获取自己的miss表
                     m.postDelayed(g1, 0);
                 } else {
+                    /**
+                     * seed成功
+                     */
                     m.removeCallbacks(g1);
                     mdUserData.putString("seed", apiFindSeed.getResult().getKeyValue("seedId")).commit();
                     getSeedInfo();
@@ -289,6 +314,23 @@ public class main_tree extends Activity {
                     } catch (Exception m) {
                         m.printStackTrace();
                     }
+                    /**
+                     * lower world
+                     */
+                    final toApi lowerWorldObj = new toApi();
+                    lowerWorldObj.set(toApi.lowerWorld).get();
+                    lowerWorldObj.setCheck(new check() {
+                        @Override
+                        public void okBefore() {
+                            if (!"".equals(lowerWorldObj.getResult().getKeyValue("lower")))
+                                lowerWorld.setText(lowerWorldObj.getResult().getKeyValue("lower"));
+                        }
+
+                        @Override
+                        public void missBefore() {
+
+                        }
+                    });
                 }
             }
 
@@ -320,6 +362,10 @@ public class main_tree extends Activity {
 
     //获取seedINFO
     private void getSeedInfo() {
+        if (userData.getString("seed", "") == ""){
+            mainLogic();
+            return;
+        }
         /**
          * seed成功
          */
@@ -397,8 +443,9 @@ public class main_tree extends Activity {
         mainTreeHeadInfoContentBirthday.setText(iniObj.getKeyValue("birthday", "INFO"));
         mainTreeHeadInfoContentLove.setText(iniObj.getKeyValue("love", "INFO"));
         mainTreeHeadInfoMainLove.setText(iniObj.getKeyValue("love", "INFO"));
-        int power_temp = (Integer.parseInt(iniObj.getKeyValue("love", "INFO")) - 100) * 25;
-        int level = (int)Math.floor(Math.pow((power_temp < 0 ? 0 : power_temp), 1.04));
+
+        //int level = (int) Math.floor(Math.pow((Integer.parseInt(iniObj.getKeyValue("love", "INFO")) / 10.0), 1.0/2));
+        int level = leaveCalc(Integer.parseInt(iniObj.getKeyValue("love", "INFO")));
         mainTreeHeadInfoMainLevel.setText(level + "");
         mainTreeHeadInfoContentLevel.setText(level + "");
 
@@ -413,6 +460,34 @@ public class main_tree extends Activity {
                         + "mood", "INFO")));
 
         diaryViewDraw();
+
+        //根据leave设置tree
+        if (level < 10){
+            mainTreeContentYesTree.setImageResource(R.mipmap.zhongzi);
+            mainTreeContentYesBack.setImageResource(R.mipmap.xiaotudi);
+        } else if (level < 20){
+            mainTreeContentYesTree.setImageResource(R.mipmap.xiaoyoumiao);
+        } else if (level < 30) {
+            mainTreeContentYesTree.setImageResource(R.mipmap.dayoumiao);
+        } else if (level < 40) {
+            mainTreeContentYesTree.setImageResource(R.mipmap.xiaoshumiao);
+        } else if (level < 50) {
+            mainTreeContentYesTree.setImageResource(R.mipmap.dashumiao);
+        } else if (level < 60) {
+            mainTreeContentYesTree.setImageResource(R.mipmap.xiaochengshu);
+            mainTreeContentYesBack.setImageResource(R.mipmap.caodi);
+        } else {
+            mainTreeContentYesTree.setImageResource(R.mipmap.dachengshupng);
+            mainTreeContentYesBack.setImageResource(R.mipmap.yinghuacaodi);
+        }
+    }
+    private int leaveCalc(int love){
+        int sum = 0;
+        for (int i = 0; ; i++){
+            sum += 10 * i * i;
+            if (sum > love)
+                return i - 1;
+        }
     }
 
     /**
@@ -466,51 +541,220 @@ public class main_tree extends Activity {
     public void leave(final View m) {
         Q(m);
 
-//        View.OnClickListener buttonClick = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final toApi leaveUp = new toApi();
-//                leaveUp.set(toApi.api_addSeedInfo(
-//                        userData.getString("seed", ""),
-//                        userID, "leave", "testok")).get();
-//                leaveUp.setCheck(new check() {
-//                    @Override
-//                    public void okBefore() {
-//                        if ("true".equals(leaveUp.getResult().getKeyValue("return")))
-//                            Toast.makeText(main_tree, "留言成功", Toast.LENGTH_LONG).show();
-//                        else
-//                            Toast.makeText(main_tree, "你的留言丢失在茫茫人海中了", Toast.LENGTH_LONG).show();
-//                    }
-//
-//                    @Override
-//                    public void missBefore() {
-//                        Toast.makeText(main_tree, "网络可能有脾气", Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//            }
-//        };
+        if (Integer.parseInt(mainTreeHeadInfoMainLevel.getText().toString()) < 10){
+            Toast.makeText(main_tree, "等级不够\u3000暂不可用", Toast.LENGTH_LONG).show();
+            return;
+        }
 
-        AlertDialog.Builder leaveView = new AlertDialog.Builder(main_tree);
+        final AlertDialog.Builder leaveView = new AlertDialog.Builder(main_tree);
+        final AlertDialog[] leaveClose = new AlertDialog[1];
+        final EditText leaveWord = new EditText(main_tree);
+        LinearLayout leaveDiv = new mainYesViews(main_tree).leaveView(leaveWord,
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!checkStr.checkLeave(leaveWord.getText().toString())) {
+                            Toast.makeText(main_tree, "文字中出现非常规字符\u3000请重试", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        final toApi leaveUp = new toApi();
+                        leaveUp.set(toApi.api_addSeedInfo(
+                                userData.getString("seed", ""),
+                                userData.getString("user", ""),
+                                "leave", leaveWord.getText().toString())).get();
+                        leaveUp.setCheck(new check() {
+                            @Override
+                            public void okBefore() {
+                                if ("true".equals(leaveUp.getResult().getKeyValue("return"))) {
+                                    Toast.makeText(main_tree, "留言成功", Toast.LENGTH_LONG).show();
+                                    addLove(2);
+                                    leaveClose[0].dismiss();
+                                } else
+                                    Toast.makeText(main_tree, "你的留言丢失在茫茫人海中了", Toast.LENGTH_LONG).show();
+                            }
+
+                            @Override
+                            public void missBefore() {
+                                Toast.makeText(main_tree, "网线可能有脾气", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
+
         leaveView.setTitle(" ");
         leaveView.setIcon(R.mipmap.leave);
-        leaveView.setView(new mainYesViews(main_tree).leaveView(leaveView, userData)).show();
-
+        leaveClose[0] = leaveView.setView(leaveDiv).show();
     }
 
     public void watering(final View m) {
         Q(m);
+        mainTreeContentYesTree.callOnClick();
+
+        nativeIni iniInfo = new nativeIni(main_tree);
+        long lastTime = Long.parseLong(iniInfo.getIni().getKeyValue("watering", "CD"));
+        long timeInterval = System.currentTimeMillis() - lastTime;
+        if (timeInterval < 1800000){
+            int hour = (int) ((1800000 - timeInterval) / 60000) / 60;
+            int minute = (int) ((1800000 - timeInterval) / 60000) % 60;
+            Toast.makeText(main_tree, "请\u3000" + hour + "h:" + minute + "min\u3000后再浇水", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        final toApi watering = new toApi();
+        watering.set(toApi.api_mdSeedInfo(userData.getString("seed", ""), userID, "watering",
+                Long.toString(System.currentTimeMillis()) )).get();
+        watering.setCheck(new check() {
+            @Override
+            public void okBefore() {
+                if ("true".equals(watering.getResult().getKeyValue("return"))){
+                    addLove(2, new runCode() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(main_tree, "成功浇水，加2成长值", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void missBefore() {
+                Toast.makeText(main_tree, "你断网了", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void manure(final View m) {
         Q(m);
+        mainTreeContentYesTree.callOnClick();
+
+        nativeIni iniInfo = new nativeIni(main_tree);
+        long lastTime = Long.parseLong(iniInfo.getIni().getKeyValue("manure", "CD"));
+        long timeInterval = System.currentTimeMillis() - lastTime;
+        if (timeInterval < 3600000){
+            int hour = (int) ((3600000 - timeInterval) / 60000) / 60;
+            int minute = (int) ((3600000 - timeInterval) / 60000) % 60;
+            Toast.makeText(main_tree, "请\u3000" + hour + "h:" + minute + "min\u3000后再施肥", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        final toApi watering = new toApi();
+        watering.set(toApi.api_mdSeedInfo(userData.getString("seed", ""), userID, "manure",
+                Long.toString(System.currentTimeMillis()) )).get();
+        watering.setCheck(new check() {
+            @Override
+            public void okBefore() {
+                if ("true".equals(watering.getResult().getKeyValue("return"))){
+                    addLove(4, new runCode() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(main_tree, "成功施肥，加4成长值", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void missBefore() {
+                Toast.makeText(main_tree, "你断网了", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void debug(final View m) {
         Q(m);
+        mainTreeContentYesTree.callOnClick();
+
+        nativeIni iniInfo = new nativeIni(main_tree);
+        long lastTime = Long.parseLong(iniInfo.getIni().getKeyValue("debug", "CD"));
+        long timeInterval = System.currentTimeMillis() - lastTime;
+        if (timeInterval < 5400000){
+            int hour = (int) ((5400000 - timeInterval) / 60000) / 60;
+            int minute = (int) ((5400000 - timeInterval) / 60000) % 60;
+            Toast.makeText(main_tree, "请\u3000" + hour + "h:" + minute + "min\u3000后再杀虫", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        final toApi watering = new toApi();
+        watering.set(toApi.api_mdSeedInfo(userData.getString("seed", ""), userID, "debug",
+                Long.toString(System.currentTimeMillis()) )).get();
+        watering.setCheck(new check() {
+            @Override
+            public void okBefore() {
+                if ("true".equals(watering.getResult().getKeyValue("return"))){
+                    addLove(6, new runCode() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(main_tree, "杀虫成功，加6成长值", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void missBefore() {
+                Toast.makeText(main_tree, "你断网了", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void weeding(final View m) {
         Q(m);
+        mainTreeContentYesTree.callOnClick();
+
+        nativeIni iniInfo = new nativeIni(main_tree);
+        long lastTime = Long.parseLong(iniInfo.getIni().getKeyValue("weeding", "CD"));
+        long timeInterval = System.currentTimeMillis() - lastTime;
+        if (timeInterval < 7200000){
+            int hour = (int) ((7200000 - timeInterval) / 60000) / 60;
+            int minute = (int) ((7200000 - timeInterval) / 60000) % 60;
+            Toast.makeText(main_tree, "请\u3000" + hour + "h:" + minute + "min\u3000后再除草", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        final toApi watering = new toApi();
+        watering.set(toApi.api_mdSeedInfo(userData.getString("seed", ""), userID, "weeding",
+                Long.toString(System.currentTimeMillis()) )).get();
+        watering.setCheck(new check() {
+            @Override
+            public void okBefore() {
+                if ("true".equals(watering.getResult().getKeyValue("return"))){
+                    addLove(8, new runCode() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(main_tree, "除草成功，加8成长值", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void missBefore() {
+                Toast.makeText(main_tree, "你断网了", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    //加经验
+    public void addLove(int love){
+        addLove(love, null);
+    }
+    public void addLove(int love, final runCode code) {
+        final toApi addLove = new toApi();
+        addLove.set(toApi.api_mdSeedInfo(userData.getString("seed", ""), userID, "love", Integer.toString(love))).get();
+        addLove.setCheck(new check() {
+            @Override
+            public void okBefore() {
+                if (!"true".equals(addLove.getResult().getKeyValue("return")))
+                    Toast.makeText(main_tree, "love消失了", Toast.LENGTH_SHORT).show();
+                if (!(code == null)) code.run();
+            }
+
+            @Override
+            public void missBefore() {
+                Toast.makeText(main_tree, "love会消失吗", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void Q(final View m) {
@@ -529,15 +773,44 @@ public class main_tree extends Activity {
             }
         });
     }
+    public void Q1(final View m){
+        m.animate().scaleX(1.2f).setDuration(55).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                m.animate().scaleX(0.8f).setDuration(105).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        m.animate().scaleX(1.18f).setDuration(65).withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                m.animate().scaleX(0.88f).setDuration(76).withEndAction(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        m.animate().scaleX(1.13f).setDuration(86).withEndAction(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                m.animate().scaleX(1f).setDuration(100);
+                                            }
+                                        });;;
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
     //diary view draw
-    private void diaryViewDraw(){
+    private void diaryViewDraw() {
         mainTreeEndLogContentDiary.removeAllViews();
 
         twoArray diary = new nativeIni(main_tree).getDiary();
         List<String> diaryId = diary.getRootList();
         int diaryLength = diary.rootLength();
 
-        for (int i = (diaryLength - 100 < 0 ? 0 : diaryLength - 100); i < diaryLength; i++){
+        for (int i = (diaryLength - 100 < 0 ? 0 : diaryLength - 100); i < diaryLength; i++) {
             try {
                 String time = diaryId.get(i);
                 String Ymd = time.substring(0, 10);
@@ -553,7 +826,7 @@ public class main_tree extends Activity {
                     mainTreeEndLogContentDiary.addView(new diaryViews(main_tree).leaveView(name, value, Ymd + "\n" + his), 0);
                 else
                     mainTreeEndLogContentDiary.addView(new diaryViews(main_tree).logsView(name, value, Ymd + ":" + his), 0);
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -573,7 +846,7 @@ public class main_tree extends Activity {
             public void okBefore() {
                 final TextView selfNeed = (TextView) findViewById(R.id.main_tree_content_no_selfneed);
                 if ("false".equals(apiFindNeed.getResult().getKeyValue("return"))) {
-                    selfNeed.setText(randPhrase.mineSign());
+                    selfNeed.setText(randPhrase.mineSign() + "\n编辑之后会发送到大厅");
                 } else if ("true".equals(apiFindNeed.getResult().getKeyValue("return"))) {
                     selfNeed.setText(apiFindNeed.getResult().getKeyValue("sign"));
                 }
@@ -699,23 +972,39 @@ public class main_tree extends Activity {
                                                                                 Toast.makeText(main_tree, "有人想和你合种请先拒绝或接受", Toast.LENGTH_LONG).show();
                                                                                 return;
                                                                             }
-                                                                            //否则就建立miss关系
-                                                                            final toApi missObj = new toApi();
-                                                                            missObj.set(toApi.api_mdMiss(name, userData.getString("user", ""))).get();
-                                                                            missObj.setCheck(new check() {
+                                                                            final toApi findSeed = new toApi();
+                                                                            findSeed.set(toApi.api_findSeed(userID)).get();
+                                                                            findSeed.setCheck(new check() {
                                                                                 @Override
                                                                                 public void okBefore() {
-                                                                                    if ("true".equals(missObj.getResult().getKeyValue("return"))) {
-                                                                                        Toast.makeText(main_tree, "已发送请求，请耐心等待", Toast.LENGTH_LONG).show();
-                                                                                        mdUserData.putString("missTa", name);
-                                                                                        mdUserData.commit();
-                                                                                    } else
-                                                                                        Toast.makeText(main_tree, "发送失败", Toast.LENGTH_LONG).show();
+                                                                                    if ("false".equals(findSeed.getResult().getKeyValue("return"))) {
+                                                                                        //否则就建立miss关系
+                                                                                        final toApi missObj = new toApi();
+                                                                                        missObj.set(toApi.api_mdMiss(name, userData.getString("user", ""))).get();
+                                                                                        missObj.setCheck(new check() {
+                                                                                            @Override
+                                                                                            public void okBefore() {
+                                                                                                if ("true".equals(missObj.getResult().getKeyValue("return"))) {
+                                                                                                    Toast.makeText(main_tree, "已发送请求，请耐心等待", Toast.LENGTH_LONG).show();
+                                                                                                    mdUserData.putString("missTa", name);
+                                                                                                    mdUserData.commit();
+                                                                                                } else
+                                                                                                    Toast.makeText(main_tree, "发送失败", Toast.LENGTH_LONG).show();
+                                                                                            }
+
+                                                                                            @Override
+                                                                                            public void missBefore() {
+                                                                                                Toast.makeText(main_tree, "网络错误", Toast.LENGTH_LONG).show();
+                                                                                            }
+                                                                                        });
+                                                                                    } else {
+                                                                                        mainLogic();
+                                                                                    }
                                                                                 }
 
                                                                                 @Override
                                                                                 public void missBefore() {
-                                                                                    Toast.makeText(main_tree, "网络错误", Toast.LENGTH_LONG).show();
+
                                                                                 }
                                                                             });
                                                                         }
@@ -906,13 +1195,13 @@ public class main_tree extends Activity {
                                         apiDelNeedB.set(toApi.api_delNeed(Ta)).get();
                                         apiDelNeedB.setCheck(DelNeedA);
                                     } else {
-                                        Toast.makeText(main_tree, "Error del need A", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(main_tree, "Error del need B", Toast.LENGTH_LONG).show();
                                     }
                                 }
 
                                 @Override
                                 public void missBefore() {
-                                    Toast.makeText(main_tree, "NetworkError del need A", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(main_tree, "NetworkError del need B", Toast.LENGTH_LONG).show();
                                 }
                             };
                             final check DelMissA = new check() {
@@ -1085,7 +1374,7 @@ public class main_tree extends Activity {
 
     //帮助按钮
     public void onHelp(View view) {
-        finish();
+        startActivity(new Intent(main_tree.this, help.class));
     }
 
     //背景按钮
@@ -1188,6 +1477,10 @@ public class main_tree extends Activity {
                 }
                 if (msg.what == 10) {
                     getSeedInfo();
+                    return;
+                }
+                if (msg.what == 20) {
+                    mainLogic();
                     return;
                 }
             }

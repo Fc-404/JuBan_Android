@@ -2,11 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:clipToPadding="false"
+              android:clickable="false"
               android:id="@+id/main_tree_content_yes"
               android:orientation="vertical">
     <!--首部模块-->
     <LinearLayout android:layout_width="match_parent"
                   android:orientation="horizontal"
+                  android:clipToPadding="false"
+                  android:clickable="false"
                   android:layout_height="150dp">
         <LinearLayout android:layout_width="wrap_content"
                       android:orientation="horizontal"
@@ -30,8 +34,8 @@
                        android:layout_height="80dp"/>
         </LinearLayout>
         <LinearLayout android:layout_width="0dp"
-              android:layout_weight="0"
-              android:layout_height="match_parent"/>
+                      android:layout_weight="0"
+                      android:layout_height="match_parent"/>
         <TextView android:layout_width="0dp"
                   android:layout_weight="1"
                   android:maxHeight="100dp"
@@ -45,11 +49,14 @@
                   android:layout_gravity="center_vertical"
                   android:gravity="center_vertical|right"
                   android:padding="12dp"
+                  android:id="@+id/lowerWorld"
                   android:layout_height="wrap_content"/>
     </LinearLayout>
     <!--交互模块-->
     <LinearLayout android:layout_width="match_parent"
                   android:layout_weight="1"
+                  android:clipToPadding="false"
+                  android:clickable="false"
                   android:layout_height="0dp">
         <!--左边交互模块-->
         <LinearLayout android:layout_width="wrap_content"
@@ -80,12 +87,24 @@
                        android:layout_height="60dp"/>
         </LinearLayout>
         <!--中间视图模块-->
-        <LinearLayout android:layout_width="0dp"
-                      android:layout_weight="1"
-                      android:background="@color/colorWhiteT"
-                      android:layout_height="match_parent">
-
-        </LinearLayout>
+        <FrameLayout android:layout_width="0dp"
+                     android:layout_weight="1"
+                     android:background="@drawable/shape_round_20dp_top_whitet"
+                     android:clipToPadding="false"
+                     android:clickable="false"
+                     android:layout_height="match_parent">
+            <ImageView android:layout_width="match_parent"
+                       android:src="@mipmap/xiaotudi"
+                       android:scaleType="centerInside"
+                       android:id="@+id/main_tree_content_yes_back"
+                       android:layout_height="match_parent"/>
+            <ImageView android:layout_height="match_parent"
+                       android:src="@mipmap/zhongzi"
+                       android:scaleType="centerInside"
+                       android:onClick="Q1"
+                       android:id="@+id/main_tree_content_yes_tree"
+                       android:layout_width="match_parent"/>
+        </FrameLayout>
         <!--右边交互模块-->
         <LinearLayout android:layout_width="wrap_content"
                       android:orientation="vertical"
